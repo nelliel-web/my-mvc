@@ -4,7 +4,9 @@ namespace App\Controller;
 class Index extends \Core\Controller
 {
     public function indexAction(){
-        echo 'мы тут';
-        $this->_render = false;
+        $model = new \App\Models\Index\indexModel();
+
+        $this->view->userName = $model->getName();
+
     }
 }

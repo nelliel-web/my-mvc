@@ -43,15 +43,13 @@ class Application
                 throw new Exception\Error404('Method ' . $actionFuncName . ' not found in ' . $controllerFileName);
             }
 
-            $tpl = 'App/Templates/' . $dispatcher->getControllerName() .
+            $tpl = '../App/Templates/' . $dispatcher->getControllerName() .
                 '/' . $dispatcher->getActionToken() . '.phtml';
 
             $view = new View();
             $controllerObj->view = $view;
-            echo '<pre>';
-            var_dump($controllerObj);
-            $controllerObj->$actionFuncName();
 
+            $controllerObj->$actionFuncName();
             if ($controllerObj->needRender()){
                 $html = $view->render($tpl);
                 echo $html;
