@@ -1,7 +1,69 @@
 <?php
-
-
-var_dump( $this->userName);
-echo '<br>' . $this->userName . '<br>';
+//var_dump($this->userName);
+//echo '<br>' . $this->userName . '<br>';
 ?>
-Зарегестрироваться
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style>
+    .alert-danger{
+        padding: 10px;
+    }
+</style>
+<div class="container">
+    <header>
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1>Регистрация</h1><br>
+            </div>
+        </div>
+    </header>
+    <div class="row">
+        <form enctype="multipart/form-data" action="/Index/register" method="post" id="registerAction">
+            <div class="col-6 mx-auto">
+                <div class="input-group row">
+                    <div class="form-group col-6">
+                        <label for="email">Email:</label>
+                        <input required class="form-control" type="text" id="email" name="email">
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="email">Введите пароль:</label>
+                        <input required class="form-control" type="pass" id="pass" name="pass">
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="name">Имя:</label>
+                        <input class="form-control" type="text" id="name" name="name">
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="name">Возраст:</label>
+                        <input required class="form-control" type="number" name="age" id="age">
+                    </div>
+                    <div class="form-group col-12">
+                        <label for="desc">Описание:</label>
+                        <textarea class="form-control" id="desc" name="desc"></textarea>
+                    </div>
+
+                    <div class="form-group col-12">
+                        <label for="avatar">Загрузите изображение (аватар): </label>
+                        <input type="file" accept="image/*" class="form-control-file" id="avatar" name="avatar">
+                    </div>
+                    <div class="form-group col-6">
+                        <button id="register" class="btn btn-info" style="width: 100%;" type="submit">
+                            Зарегистрироваться
+                        </button>
+                    </div>
+                    <div class="form-group col-6">
+                        <a href="/login" class="btn btn-dark" style="width: 100%;">Войти в акаунт</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <?php if (isset($_SESSION['error'])): ?>
+            <div class="col-6 mx-auto">
+                <div class="alert-danger">
+                    <?= $_SESSION['error']; ?>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
+
+</div>

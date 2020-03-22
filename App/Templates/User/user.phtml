@@ -1,2 +1,79 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style>
+    .btn {
+        width: 100%;
+    }
+
+    .image {
+        height: 150px;
+        width: 100%;
+        background-position: center;
+        background-size: cover;
+    }
+</style>
+
 <?php
-?>user
+
+?>
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="image" style="background-image: url('<?= $this->user->getImage(); ?>');"></div>
+        </div>
+        <div class="col-md-9">
+            <table class="table table-hover table-dark">
+                <thead>
+                <tr>
+                    <th scope="col">Ваше имя</th>
+                    <th scope="col">Возраст</th>
+                    <th scope="col">e-mail</th>
+                    <th scope="col">О себе</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row"><?= $this->user->getName() ?></th>
+                    <td><?= $this->user->getAge() ?></td>
+                    <td><?= $this->user->getEmail() ?></td>
+                    <td><?= $this->user->getDesc() ?></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-3">
+            <form action="/user/uploadAvatar" method="post" enctype="multipart/form-data">
+                <input class="btn btn-info" type="submit" value="Загрузить новый аватар">
+                <input type="file" name="avatar">
+            </form>
+        </div>
+        <div class="col-md-3">
+            <a class="btn btn-info" href="avatars">Посмотреть все фотографии</a>
+        </div>
+        <div class="col-md-3">
+            <a class="btn btn-warning" href="listUsers">Посмотреть всех пользователей</a>
+        </div>
+        <div class="offset-1 col-md-2">
+            <div class="row">
+                <div class="col-md-12">
+                    <form action="/user/exit" method="post">
+                        <input class="btn btn-dark" type="submit" value="Выйти">
+                    </form>
+                </div>
+                <div class="col-md-12">
+                    <form action="/user/delite" method="post">
+                        <input class="btn btn-danger" type="submit" value="Удалить аккаунт">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+

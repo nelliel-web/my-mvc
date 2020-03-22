@@ -1,0 +1,67 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style>
+    .btn {
+        width: 100%;
+    }
+</style>
+
+<?php
+$users = $this->users->getAllUsers();
+?>
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-2">
+            <a class="btn btn-info" href="profile">Назад</a>
+        </div>
+        <div class="offset-7 col-md-3">
+            <form action="/user/exit" method="post">
+                <input class="btn btn-dark" type="submit" value="Выйти из профиля">
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center">Список пользователей</h1>
+        </div>
+        <div class="col-md-12 mt-2">
+            <table class="table table-hover table-dark">
+                <thead>
+                <tr>
+                    <th scope="col">Имя</th>
+                    <th scope="col">Возраст</th>
+                    <th scope="col">e-mail</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($users as $user): ?>
+                    <tr>
+                        <th scope="row"><?= $user['name'] ?></th>
+                        <td><?= $user['age'] ?></td>
+                        <td><?= $user['email'] ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-2">
+            <a class="btn btn-info" href="profile">Назад</a>
+        </div>
+        <div class="offset-7 col-md-3">
+            <form action="/user/exit" method="post">
+                <input class="btn btn-dark" type="submit" value="Выйти из профиля">
+            </form>
+        </div>
+
+    </div>
+</div>
+

@@ -14,11 +14,29 @@ class Dispatcher
     {
         return [
             'Login' => [
-                'index' => 'User.login',
+                'index' => 'Index.auth',
             ],
             'Register' => [
-                'index' => 'User.register',
+                'index' => 'Index.index',
             ],
+            'Profile' => [
+                'index' => 'User.user',
+            ],
+            'user/uploadAvatar' => [
+                'index' => 'User.user',
+            ],
+            'Avatars' => [
+                'index' => 'User.avatars',
+            ],
+            'user/delite' => [
+                'index' => 'Index.index',
+            ],
+            'Listusers' => [
+                'index' => 'User.listUsers',
+            ],
+
+
+
         ];
     }
 

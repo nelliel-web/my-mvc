@@ -14,17 +14,18 @@ class Application
 
         $request = new Request();
         $dispatcher = new Dispatcher();
-        //$db = new DB();
+        $db = new DB();
 
         $this->_context->setRequest($request);
         $this->_context->setDispatcher($dispatcher);
-        //$this->_context->setDb($db);
+        $this->_context->setDb($db);
     }
 
     public function run()
     {
 
         try {
+            session_start();
             $this->_init();
             $this->_context->getDispatcher()->dispatch();
             $dispatcher = $this->_context->getDispatcher();
@@ -56,11 +57,9 @@ class Application
             }
 
 
-
         } catch (Exception\Error404 $e) {
             header('HTTP/1.0 404 Not Found');
             trigger_error($e->getMessage());
-
         }
 
 

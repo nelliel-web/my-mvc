@@ -13,6 +13,7 @@ class Context
     /** @var DB */
     private $_db;
 
+
     private function __construct()
     {
     }

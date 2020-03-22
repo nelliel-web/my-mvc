@@ -1,0 +1,35 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style>
+    .btn {
+        width: 100%;
+    }
+
+    .image {
+        height: 150px;
+        width: 100%;
+        background-position: center;
+        background-size: cover;
+    }
+</style>
+<?php
+$avatars = $this->avatars->getAllAvatars();
+
+?>
+<div class="container">
+    <div class="row">
+        <div class="col-12 mb-5"><h1 class="text-center">Загруженные фотографии</h1></div>
+        <div class="col-4 mb-4"><a href="/profile" class="btn btn-info">Назад в профиль</a></div>
+        <div class="col-4 mb-4"></div>
+        <div class="col-4 mb-4"><a href="/profile" class="btn btn-dark">Выйти из профиля</a></div>
+
+        <?php foreach ($avatars as $avatar): ?>
+            <div class="col-md-4 mb-4">
+                <div class="image" style="background-image: url('<?= '/' . $avatar["url"] ?>')"></div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+
+</div>
+
+

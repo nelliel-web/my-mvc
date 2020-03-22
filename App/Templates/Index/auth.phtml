@@ -1,0 +1,52 @@
+<?php
+//var_dump($this->userName);
+//echo '<br>' . $this->userName . '<br>';
+?>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style>
+    .alert-danger{
+        padding: 10px;
+    }
+</style>
+<div class="container">
+    <header>
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1>Войти в аккаунт</h1><br>
+            </div>
+        </div>
+    </header>
+    <div class="row">
+        <form action="/login" method="post" id="authAction" style="width: 100%;">
+            <div class="col-6 mx-auto">
+                <div class="input-group row">
+                    <div class="form-group col-6">
+                        <label for="email">Email:</label>
+                        <input required class="form-control" type="text" id="email" name="email">
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="email">Введите пароль:</label>
+                        <input required class="form-control" type="pass" id="pass" name="pass">
+                    </div>
+                    <div class="form-group col-12">
+                        <button id="auth" class="btn btn-info" style="width: 100%;" type="submit">
+                            Войти в акаунт
+                        </button>
+                    </div>
+                    <div class="form-group col-12">
+                        <a href="/register" class="btn btn-dark" style="width: 100%;">Зарегистрироваться</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <?php if (isset($_SESSION['error_auth'])): ?>
+            <div class="col-6 mx-auto">
+                <div class="alert-danger">
+                    <?= $_SESSION['error_auth']; ?>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
+
+</div>
