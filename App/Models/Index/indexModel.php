@@ -2,7 +2,7 @@
 
 namespace App\Models\Index;
 
-class indexModel
+class IndexModel
 {
     private $_id;
     private $_name;
@@ -122,10 +122,28 @@ class indexModel
         return sha1('d0=+0' . $password . 'k5\R0.-~lL');
     }
 
+    public function getFromPost(array $post, $typeForm = 'reg')
+    {
+        if ($typeForm == 'reg') {
+            $post['name'] = $_POST['name'] ?? '';
+            $post['email'] = $_POST['email'] ?? '';
+            $post['pass'] = $_POST['pass'] ?? '';
+            $post['age'] = $_POST['age'] ?? '';
+            $post['desc'] = $_POST['desc'] ?? '';
+            $post['image'] = $_FILES['avatar'] ?? '';
+            return $post;
+        }elseif ($typeForm == 'auth'){
+            $post['email'] = $_POST['email'] ?? '';
+            $post['pass'] = $_POST['pass'] ?? '';
+            return $post;
+        }
+        return '';
+    }
+
     public function save()
     {
 
-        if ($this->hasEmail($this->_email)){
+        if ($this->hasEmail($this->_email)) {
             $_SESSION['error'] = 'Пользователь с таки Email Уже зарегистрирован';
             return false;
         }
@@ -154,7 +172,8 @@ class indexModel
         return true;
     }
 
-    private function hasEmail($email){
+    private function hasEmail($email)
+    {
         $db = \Core\Context::i()->getDb();
         $data = $db->fetchOne("SELECT email FROM users WHERE email = :email", __METHOD__,
             ['email' => $email]);
@@ -187,32 +206,11 @@ class indexModel
             $this->_passwordHash = $data['pass'];
         }
         $this->_image = $data['image'] ?? '';
-
         $this->_email = $data['email'];
         $this->_age = $data['age'];
         $this->_desc = $data['desc'];
     }
 
-    public static function getList(array $ids)
-    {
-        $db = \Core\Context::i()->getDb();
-        foreach ($ids as &$id) {
-            $id = (int)$id;
-        }
-        $idsStr = implode(',', $ids);
-        $data = $db->fetchAll("SELECT * FROM users WHERE id IN ($idsStr)",
-            __METHOD__);
-        if (!$data) {
-            return [];
-        }
-        $res = [];
-        foreach ($data as $elem) {
-            $model = new self();
-            $model->loadData($elem);
-            $res[$model->getId()] = $model;
-        }
-        return $res;
-    }
 
     public function check(&$error = '')
     {
@@ -253,6 +251,7 @@ class indexModel
             return false;
         }
         $this->_id = $userId['id'];
+        unset($_SESSION['error_auth']);
         $this->setSess();
         return true;
 
@@ -267,6 +266,7 @@ class indexModel
             $_SESSION['email'] = $this->_email;
         }
     }
+
 
     private function uploadAvatar()
     {
@@ -335,28 +335,6 @@ class indexModel
         }
 
         return $typeFile;
-    }
-
-
-    private function myScanDir($dir)
-    {
-        $list = scandir($dir);
-        unset($list[0], $list[1]);
-        return array_values($list);
-    }
-
-    private function clearDir($dir)
-    {
-        $list = myScanDir($dir);
-
-        foreach ($list as $file) {
-            if (is_dir($dir . $file)) {
-                clearDir($dir . $file . '/');
-                rmdir($dir . $file);
-            } else {
-                unlink($dir . $file);
-            }
-        }
     }
 
 }

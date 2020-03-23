@@ -58,7 +58,7 @@ class Application
 
 
         } catch (Exception\Error404 $e) {
-            header('HTTP/1.0 404 Not Found');
+            header('Location: /page404');
             trigger_error($e->getMessage());
         }
 

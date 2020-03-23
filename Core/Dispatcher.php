@@ -34,6 +34,9 @@ class Dispatcher
             'Listusers' => [
                 'index' => 'User.listUsers',
             ],
+            'Page404' => [
+                'index' => 'Error404.error404',
+            ],
 
 
 

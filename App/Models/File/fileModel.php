@@ -2,7 +2,7 @@
 
 namespace App\Models\File;
 
-class fileModel
+class FileModel
 {
 
     private $_id;
@@ -93,7 +93,7 @@ class fileModel
         if ($data) {
             return $data;
         }
-        return false;
+        return [];
     }
 
 

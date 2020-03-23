@@ -14,15 +14,9 @@ class Index extends \Core\Controller
 
     public function registerAction()
     {
-
-        $data['name'] = $_POST['name'] ?? '';
-        $data['email'] = $_POST['email'] ?? '';
-        $data['pass'] = $_POST['pass'] ?? '';
-        $data['age'] = $_POST['age'] ?? '';
-        $data['desc'] = $_POST['desc'] ?? '';
-        $data['image'] = $_FILES['avatar'] ?? '';
-
         $model = new \App\Models\Index\indexModel();
+        $data = $model->getFromPost($_POST);
+
         $model->loadData($data, true);
         if (!$model->check($error)) {
             $_SESSION['error'] = $error;
@@ -41,23 +35,20 @@ class Index extends \Core\Controller
 
     public function authAction()
     {
-
         if ($this->isSession()) {
             header('Location: /profile');
             return;
         }
-        $data['email'] = $_POST['email'] ?? '';
-        $data['pass'] = $_POST['pass'] ?? '';
+        $model = new \App\Models\Index\indexModel();
+        $data = $model->getFromPost($_POST, 'auth');
 
         if (!empty($data['email']) and !empty($data['pass'])) {
-            $model = new \App\Models\Index\indexModel();
             if ($model->authUser($data) === false) {
                 $_SESSION['error_auth'] = 'Неверный логин или пароль';
                 return;
             }
             header('Location: /profile');
         }
-
 
     }
 }

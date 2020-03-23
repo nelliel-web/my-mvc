@@ -2,7 +2,7 @@
 
 namespace App\Models\User;
 
-class userModel
+class UserModel
 {
 
     private $_id;
@@ -118,14 +118,14 @@ class userModel
     public function getAllUsers(string $order = 'ASC')
     {
         $db = \Core\Context::i()->getDb();
-        $users = $db->fetchAll("SELECT email, `name`, age FROM `users` order by id $order", __METHOD__);
+        $users = $db->fetchAll("SELECT email, `name`, age FROM `users` order by age $order", __METHOD__);
         if ($users) {
             $i=0;
             foreach ($users as $user){
                 if ($user['age'] >= 18){
-                    $users[$i]['age'] = 'Совершеннолетний';
+                    $users[$i]['ageText'] = 'Совершеннолетний';
                 }else{
-                    $users[$i]['age'] = 'НЕсовершеннолетний';
+                    $users[$i]['ageText'] = 'НЕсовершеннолетний';
                 }
                 $i++;
             }
